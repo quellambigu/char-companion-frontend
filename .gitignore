@@ -1,0 +1,16 @@
+node_modules/
+*.bak
+*.bak_*
+.env
+*.env
+.DS_Store
+backups/
+merge_ui.py
+data/
+*.env
+*secret*
+*.key
+node_modules/
+*.bak
+*.bak_*
+本地备份_*/

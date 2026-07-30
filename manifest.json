@@ -1,0 +1,12 @@
+{
+  "display_name": "随身推送",
+  "loading_order": 100,
+  "requires": [],
+  "optional": [],
+  "js": "index.js",
+  "css": "style.css",
+  "author": "community",
+  "version": "1.5.4",
+  "homePage": "https://github.com/quellambigu/char-companion-frontend",
+  "auto_update": false
+}

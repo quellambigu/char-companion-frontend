@@ -1,0 +1,1351 @@
+/* Char Companion — 独立弹窗面板样式(深色科技风, Tab式布局) */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+.cc-dialog {
+  --cc-bg: #0c0e13;
+  --cc-surface: #161922;
+  --cc-surface-2: #1e222e;
+  --cc-surface-3: #262b3a;
+  --cc-border: #2a2f3f;
+  --cc-text: #e9ebf1;
+  --cc-text-dim: #8b93a7;
+  --cc-text-faint: #5c6478;
+  --cc-accent: #4fd8ff;
+  --cc-accent-dim: #2a5f6e;
+  --cc-accent-glow: rgba(79,216,255,0.35);
+  --cc-danger: #ff5c7a;
+  --cc-success: #5eead4;
+
+  border: none;
+  border-radius: 14px;
+  padding: 0;
+  width: 94vw;
+  max-width: 480px;
+  height: 82vh;
+  max-height: 82vh;
+  background: transparent;
+  font-family: 'Inter', -apple-system, sans-serif;
+}
+
+.cc-dialog::backdrop {
+  background: rgba(0,0,0,0.65);
+}
+
+.cc-panel {
+  background: var(--cc-bg);
+  color: var(--cc-text);
+  border: 1px solid var(--cc-border);
+  border-radius: 14px;
+  width: 100%;
+  height: 100%;
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.55);
+}
+
+.cc-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 18px 0 18px;
+  flex-shrink: 0;
+}
+
+.cc-header-title h2 {
+  margin: 0 0 3px 0;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.cc-header-sub {
+  font-size: 11.5px;
+  color: var(--cc-text-dim);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cc-pulse-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--cc-text-faint);
+  flex-shrink: 0;
+}
+
+.cc-pulse-dot.cc-pulse-on {
+  background: var(--cc-accent);
+  box-shadow: 0 0 0 0 var(--cc-accent-glow);
+  animation: cc-pulse-on 2s ease-in-out infinite;
+}
+
+.cc-pulse-dot.cc-pulse-off {
+  background: var(--cc-danger);
+  box-shadow: 0 0 0 0 rgba(255,92,122,0.35);
+  animation: cc-pulse-off 2s ease-in-out infinite;
+}
+
+@keyframes cc-pulse-on {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 var(--cc-accent-glow); }
+  50% { opacity: 0.4; box-shadow: 0 0 0 5px rgba(79,216,255,0); }
+}
+
+@keyframes cc-pulse-off {
+  0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(255,92,122,0.35); }
+  50% { opacity: 0.4; box-shadow: 0 0 0 5px rgba(255,92,122,0); }
+}
+
+.cc-close-btn {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  background: var(--cc-surface-2);
+  border: 1px solid var(--cc-border);
+  color: var(--cc-text-dim);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.cc-close-btn:hover { color: var(--cc-text); }
+
+.cc-tabs {
+  display: flex;
+  gap: 2px;
+  overflow-x: auto;
+  padding: 12px 18px 0 18px;
+  border-bottom: 1px solid var(--cc-border);
+  scrollbar-width: none;
+  flex-shrink: 0;
+}
+
+.cc-tabs::-webkit-scrollbar { display: none; }
+
+.cc-tab {
+  flex: 1;
+  min-width: 58px;
+  text-align: center;
+  padding: 8px 4px 10px 4px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--cc-text-faint);
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: color .15s;
+}
+
+.cc-tab-active {
+  color: var(--cc-accent);
+  border-bottom-color: var(--cc-accent);
+}
+
+.cc-tab:not(.cc-tab-active):hover { color: var(--cc-text-dim); }
+
+.cc-body {
+  overflow-y: auto;
+  padding: 16px 18px 6px 18px;
+  flex: 1;
+}
+
+.cc-tab-panel { display: none; }
+.cc-tab-panel-active { display: block; animation: cc-fade-in .18s ease; }
+
+@keyframes cc-fade-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.cc-section {
+  background: var(--cc-surface);
+  border: 1px solid var(--cc-border);
+  border-radius: 10px;
+  padding: 13px 14px;
+  margin-bottom: 12px;
+}
+
+.cc-section h3 {
+  margin: 0 0 10px 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cc-text);
+}
+
+.cc-label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--cc-text-dim);
+}
+
+.cc-label:first-child { margin-top: 0; }
+
+.cc-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cc-text);
+}
+
+
+.cc-label input[type="checkbox"] {
+  margin-right: 6px;
+  accent-color: var(--cc-accent);
+}
+
+.cc-input {
+  display: block;
+  width: 100%;
+  margin-top: 5px;
+  padding: 9px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--cc-border);
+  background: var(--cc-surface-2);
+  color: var(--cc-text);
+  font-size: 13px;
+  font-family: 'Inter', sans-serif;
+  box-sizing: border-box;
+  color-scheme: dark;
+}
+
+/* 强制覆盖: 酒馆自身的全局输入框样式(白底灰字)优先级有时更高,
+   这里用更精确的选择器 + !important 保证面板内所有输入框都是深色底/浅色字 */
+.cc-panel input[type="text"],
+.cc-panel input[type="password"],
+.cc-panel input[type="number"],
+.cc-panel input[type="search"],
+.cc-panel input[type="time"],
+.cc-panel textarea,
+.cc-panel select {
+  background: var(--cc-surface-2) !important;
+  color: var(--cc-text) !important;
+  border: 1px solid var(--cc-border) !important;
+  color-scheme: dark;
+}
+
+.cc-panel input::placeholder,
+.cc-panel textarea::placeholder {
+  color: var(--cc-text-faint) !important;
+  opacity: 1;
+}
+
+/* 强制覆盖: 滑块同理会被酒馆全局样式盖成看不见的深色滑块 */
+.cc-panel input[type="range"].cc-slider {
+  -webkit-appearance: none !important; appearance: none !important;
+  width: 100%; height: 4px; border-radius: 2px;
+  background: var(--cc-surface-3) !important; outline: none; cursor: pointer; margin: 0;
+}
+.cc-panel input[type="range"].cc-slider::-webkit-slider-runnable-track {
+  height: 4px; border-radius: 2px; background: var(--cc-surface-3) !important;
+}
+.cc-panel input[type="range"].cc-slider::-webkit-slider-thumb {
+  -webkit-appearance: none !important; width: 16px; height: 16px; border-radius: 50% !important;
+  background: var(--cc-accent) !important; border: none !important;
+  box-shadow: 0 0 0 3px rgba(79,216,255,0.25) !important; cursor: pointer; margin-top: -6px;
+}
+.cc-panel input[type="range"].cc-slider::-moz-range-track {
+  height: 4px; border-radius: 2px; background: var(--cc-surface-3) !important;
+}
+.cc-panel input[type="range"].cc-slider::-moz-range-thumb {
+  width: 16px; height: 16px; border: none !important; border-radius: 50% !important;
+  background: var(--cc-accent) !important; box-shadow: 0 0 0 3px rgba(79,216,255,0.25) !important; cursor: pointer;
+}
+
+.cc-input:focus {
+  outline: none;
+  border-color: var(--cc-accent);
+  box-shadow: 0 0 0 3px rgba(79,216,255,0.12);
+}
+
+.cc-input[readonly] {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11.5px;
+  color: var(--cc-text-dim);
+}
+
+#cc-bark-key, #cc-api-key, #cc-baseurl, #cc-focus-url, #cc-ntfy-topic {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+}
+
+.cc-textarea {
+  resize: vertical;
+  min-height: 54px;
+  line-height: 1.5;
+}
+
+.cc-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 5px;
+}
+
+.cc-row .cc-input { flex: 1; margin-top: 0; }
+.cc-row .cc-label { margin-top: 0; }
+
+.cc-btn {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  background: var(--cc-surface-2);
+  color: var(--cc-text);
+  cursor: pointer;
+  font-size: 12.5px;
+  font-weight: 600;
+  margin-top: 8px;
+  white-space: nowrap;
+}
+
+.cc-btn:hover { background: var(--cc-surface-3); }
+
+.cc-btn-primary {
+  background: var(--cc-accent);
+  border-color: var(--cc-accent);
+  color: #04222b;
+}
+
+.cc-btn-primary:hover { background: #6fe0ff; }
+
+.cc-btn-sm {
+  width: auto;
+  padding: 8px 12px;
+  flex-shrink: 0;
+  margin-top: 0;
+}
+
+#cc-cancel-focus, .cc-reminder-cancel {
+  color: var(--cc-danger);
+  border-color: rgba(255,92,122,0.3);
+  background: rgba(255,92,122,0.08);
+}
+#cc-cancel-focus:hover, .cc-reminder-cancel:hover {
+  background: rgba(255,92,122,0.16);
+}
+
+.cc-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.cc-actions .cc-btn { margin-top: 8px; }
+.cc-actions .cc-btn:first-child { margin-top: 0; }
+
+.cc-footer {
+  padding: 12px 18px 16px 18px;
+  border-top: 1px solid var(--cc-border);
+  background: var(--cc-bg);
+  flex-shrink: 0;
+}
+
+.cc-save-btn {
+  margin-top: 0;
+  padding: 12px;
+  font-size: 13.5px;
+  box-shadow: 0 4px 18px rgba(79,216,255,0.22);
+}
+
+.cc-status {
+  margin-top: 8px;
+  font-size: 12px;
+  min-height: 1.2em;
+  text-align: center;
+  color: var(--cc-text-dim);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.cc-hint {
+  font-size: 11.5px;
+  color: var(--cc-text-dim);
+  line-height: 1.55;
+  margin-top: 6px;
+}
+
+.cc-time-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--cc-surface-2);
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-top: 6px;
+}
+
+.cc-time-row .cc-input {
+  margin-top: 0;
+}
+
+.cc-time-row input[type="time"] {
+  width: 92px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  background: var(--cc-surface-3);
+  border: 1px solid var(--cc-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 600;
+  font-size: 13px;
+  color: var(--cc-accent);
+  color-scheme: dark;
+}
+
+.cc-time-row input[type="text"] {
+  flex: 1;
+  background: var(--cc-surface-3);
+  border: 1px solid var(--cc-border);
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  min-width: 0;
+  color: var(--cc-text);
+}
+
+.cc-time-row input[type="text"]:focus {
+  border-color: var(--cc-accent);
+  box-shadow: 0 0 0 2px rgba(79,216,255,0.12);
+}
+
+.cc-time-row input[type="time"]:focus {
+  border-color: var(--cc-accent);
+  box-shadow: 0 0 0 2px rgba(79,216,255,0.12);
+  outline: none;
+}
+
+#cc-add-time {
+  display: block;
+  width: 100%;
+  text-align: center;
+  padding: 9px 12px;
+  margin-top: 8px;
+  border: 1px dashed var(--cc-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cc-accent);
+}
+
+#cc-add-time:hover {
+  background: rgba(79,216,255,0.08);
+  border-color: var(--cc-accent);
+}
+
+.cc-rm-time {
+  width: auto;
+  margin: 0;
+  padding: 3px 7px;
+  font-size: 12px;
+  color: var(--cc-text-faint);
+  background: transparent;
+  border: none;
+  flex-shrink: 0;
+}
+
+.cc-wi-list {
+  max-height: 140px;
+  overflow-y: auto;
+  border: 1px solid var(--cc-border);
+  border-radius: 8px;
+  padding: 8px;
+  margin-top: 6px;
+  background: var(--cc-surface-2);
+}
+
+.cc-wi-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 3px 0;
+  color: var(--cc-text-dim);
+}
+
+.cc-wi-item input[type="checkbox"] { accent-color: var(--cc-accent); }
+
+/* ============================================================
+   Char Companion — 补充组件样式（追加）
+   ============================================================ */
+
+.cc-select-wrap { position: relative; }
+.cc-select-wrap::after {
+  content: ''; position: absolute; right: 13px; top: 50%;
+  width: 6px; height: 6px;
+  border-right: 1.5px solid var(--cc-text-dim);
+  border-bottom: 1.5px solid var(--cc-text-dim);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+.cc-select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  display: block; width: 100%; margin-top: 5px;
+  padding: 9px 30px 9px 11px; border-radius: 8px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text); font-size: 13px; font-family: 'Inter', sans-serif;
+  box-sizing: border-box; cursor: pointer;
+}
+.cc-select:focus { outline: none; border-color: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.12); }
+
+.cc-radio-group { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.cc-radio-chip { position: relative; }
+.cc-radio-chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.cc-radio-chip label {
+  display: block; padding: 7px 13px; border-radius: 7px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text-dim); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: .15s; white-space: nowrap;
+}
+.cc-radio-chip input:checked + label { background: var(--cc-accent-dim); border-color: var(--cc-accent); color: var(--cc-accent); }
+
+.cc-channel-field { display: none; margin-top: 10px; }
+.cc-channel-field.cc-channel-field-active { display: block; }
+
+.cc-ratio-row { margin-top: 14px; }
+.cc-ratio-row:first-child { margin-top: 0; }
+.cc-ratio-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; font-weight: 500; color: var(--cc-text); margin-bottom: 7px; }
+.cc-ratio-val { font-family: 'JetBrains Mono', monospace; color: var(--cc-accent); font-weight: 600; font-size: 12px; }
+.cc-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--cc-surface-3); outline: none; cursor: pointer; margin: 0; }
+.cc-slider::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; margin-top: -5.5px; }
+.cc-slider::-moz-range-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-moz-range-thumb { width: 15px; height: 15px; border: none; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; }
+.cc-ratio-sum { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--cc-border); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--cc-text-dim); }
+.cc-ratio-sum-ok { color: var(--cc-success); }
+.cc-ratio-sum-bad { color: var(--cc-danger); }
+
+.cc-feature-card { border: 1px solid var(--cc-border); border-radius: 10px; padding: 12px 13px; margin-bottom: 10px; background: var(--cc-surface-2); transition: border-color .15s; }
+.cc-feature-card:last-child { margin-bottom: 0; }
+.cc-feature-card.cc-feature-on { border-color: var(--cc-border); }
+.cc-feature-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cc-feature-title { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--cc-text); }
+.cc-feature-icon { width: 27px; height: 27px; border-radius: 7px; background: var(--cc-surface-3); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.cc-feature-desc { font-size: 11px; color: var(--cc-text-faint); margin-top: 2px; }
+.cc-feature-body { margin-top: 0; max-height: 0; overflow: hidden; border-top: 0 solid var(--cc-border); }
+.cc-feature-card.cc-feature-on .cc-feature-body { margin-top: 11px; padding-top: 11px; border-top-width: 1px; max-height: 600px; overflow: visible; }
+
+.cc-status-ok { color: var(--cc-success); }
+.cc-status-err { color: var(--cc-danger); }
+
+/* ============================================================
+   Char Companion — 补充组件样式（追加）
+   ============================================================ */
+
+.cc-select-wrap { position: relative; }
+.cc-select-wrap::after {
+  content: ''; position: absolute; right: 13px; top: 50%;
+  width: 6px; height: 6px;
+  border-right: 1.5px solid var(--cc-text-dim);
+  border-bottom: 1.5px solid var(--cc-text-dim);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+.cc-select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  display: block; width: 100%; margin-top: 5px;
+  padding: 9px 30px 9px 11px; border-radius: 8px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text); font-size: 13px; font-family: 'Inter', sans-serif;
+  box-sizing: border-box; cursor: pointer;
+}
+.cc-select:focus { outline: none; border-color: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.12); }
+
+.cc-radio-group { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.cc-radio-chip { position: relative; }
+.cc-radio-chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.cc-radio-chip label {
+  display: block; padding: 7px 13px; border-radius: 7px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text-dim); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: .15s; white-space: nowrap;
+}
+.cc-radio-chip input:checked + label { background: var(--cc-accent-dim); border-color: var(--cc-accent); color: var(--cc-accent); }
+
+.cc-channel-field { display: none; margin-top: 10px; }
+.cc-channel-field.cc-channel-field-active { display: block; }
+
+.cc-ratio-row { margin-top: 14px; }
+.cc-ratio-row:first-child { margin-top: 0; }
+.cc-ratio-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; font-weight: 500; color: var(--cc-text); margin-bottom: 7px; }
+.cc-ratio-val { font-family: 'JetBrains Mono', monospace; color: var(--cc-accent); font-weight: 600; font-size: 12px; }
+.cc-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--cc-surface-3); outline: none; cursor: pointer; margin: 0; }
+.cc-slider::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; margin-top: -5.5px; }
+.cc-slider::-moz-range-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-moz-range-thumb { width: 15px; height: 15px; border: none; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; }
+.cc-ratio-sum { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--cc-border); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--cc-text-dim); }
+.cc-ratio-sum-ok { color: var(--cc-success); }
+.cc-ratio-sum-bad { color: var(--cc-danger); }
+
+.cc-feature-card { border: 1px solid var(--cc-border); border-radius: 10px; padding: 12px 13px; margin-bottom: 10px; background: var(--cc-surface-2); transition: border-color .15s; }
+.cc-feature-card:last-child { margin-bottom: 0; }
+.cc-feature-card.cc-feature-on { border-color: var(--cc-border); }
+.cc-feature-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cc-feature-title { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--cc-text); }
+.cc-feature-icon { width: 27px; height: 27px; border-radius: 7px; background: var(--cc-surface-3); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.cc-feature-desc { font-size: 11px; color: var(--cc-text-faint); margin-top: 2px; }
+.cc-feature-body { margin-top: 0; max-height: 0; overflow: hidden; border-top: 0 solid var(--cc-border); }
+.cc-feature-card.cc-feature-on .cc-feature-body { margin-top: 11px; padding-top: 11px; border-top-width: 1px; max-height: 600px; overflow: visible; }
+
+.cc-status-ok { color: var(--cc-success); }
+.cc-status-err { color: var(--cc-danger); }
+
+/* ============================================================
+   Char Companion — 补充组件样式（追加）
+   ============================================================ */
+
+.cc-select-wrap { position: relative; }
+.cc-select-wrap::after {
+  content: ''; position: absolute; right: 13px; top: 50%;
+  width: 6px; height: 6px;
+  border-right: 1.5px solid var(--cc-text-dim);
+  border-bottom: 1.5px solid var(--cc-text-dim);
+  transform: translateY(-65%) rotate(45deg); pointer-events: none;
+}
+.cc-select {
+  appearance: none; -webkit-appearance: none; -moz-appearance: none;
+  display: block; width: 100%; margin-top: 5px;
+  padding: 9px 30px 9px 11px; border-radius: 8px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text); font-size: 13px; font-family: 'Inter', sans-serif;
+  box-sizing: border-box; cursor: pointer;
+}
+.cc-select:focus { outline: none; border-color: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.12); }
+
+.cc-radio-group { display: flex; gap: 6px; margin-top: 6px; flex-wrap: wrap; }
+.cc-radio-chip { position: relative; }
+.cc-radio-chip input { position: absolute; inset: 0; opacity: 0; margin: 0; cursor: pointer; }
+.cc-radio-chip label {
+  display: block; padding: 7px 13px; border-radius: 7px;
+  border: 1px solid var(--cc-border); background: var(--cc-surface-2);
+  color: var(--cc-text-dim); font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: .15s; white-space: nowrap;
+}
+.cc-radio-chip input:checked + label { background: var(--cc-accent-dim); border-color: var(--cc-accent); color: var(--cc-accent); }
+
+.cc-channel-field { display: none; margin-top: 10px; }
+.cc-channel-field.cc-channel-field-active { display: block; }
+
+.cc-ratio-row { margin-top: 14px; }
+.cc-ratio-row:first-child { margin-top: 0; }
+.cc-ratio-head { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; font-weight: 500; color: var(--cc-text); margin-bottom: 7px; }
+.cc-ratio-val { font-family: 'JetBrains Mono', monospace; color: var(--cc-accent); font-weight: 600; font-size: 12px; }
+.cc-slider { -webkit-appearance: none; appearance: none; width: 100%; height: 4px; border-radius: 2px; background: var(--cc-surface-3); outline: none; cursor: pointer; margin: 0; }
+.cc-slider::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 15px; height: 15px; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; margin-top: -5.5px; }
+.cc-slider::-moz-range-track { height: 4px; border-radius: 2px; background: var(--cc-surface-3); }
+.cc-slider::-moz-range-thumb { width: 15px; height: 15px; border: none; border-radius: 50%; background: var(--cc-accent); box-shadow: 0 0 0 3px rgba(79,216,255,0.18); cursor: pointer; }
+.cc-ratio-sum { margin-top: 12px; padding-top: 10px; border-top: 1px dashed var(--cc-border); display: flex; justify-content: space-between; font-size: 11.5px; color: var(--cc-text-dim); }
+.cc-ratio-sum-ok { color: var(--cc-success); }
+.cc-ratio-sum-bad { color: var(--cc-danger); }
+
+.cc-feature-card { border: 1px solid var(--cc-border); border-radius: 10px; padding: 12px 13px; margin-bottom: 10px; background: var(--cc-surface-2); transition: border-color .15s; }
+.cc-feature-card:last-child { margin-bottom: 0; }
+.cc-feature-card.cc-feature-on { border-color: var(--cc-border); }
+.cc-feature-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cc-feature-title { display: flex; align-items: center; gap: 9px; font-size: 13px; font-weight: 600; color: var(--cc-text); }
+.cc-feature-icon { width: 27px; height: 27px; border-radius: 7px; background: var(--cc-surface-3); display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.cc-feature-desc { font-size: 11px; color: var(--cc-text-faint); margin-top: 2px; }
+.cc-feature-body { margin-top: 0; max-height: 0; overflow: hidden; border-top: 0 solid var(--cc-border); }
+.cc-feature-card.cc-feature-on .cc-feature-body { margin-top: 11px; padding-top: 11px; border-top-width: 1px; max-height: 600px; overflow: visible; }
+
+.cc-status-ok { color: var(--cc-success); }
+.cc-status-err { color: var(--cc-danger); }
+
+/* ===== 统一复选框样式 (原生input隐藏 + 自绘方块, 不依赖appearance, 全面板通用) ===== */
+.cc-cb {
+  position: relative;
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+.cc-cb input[type="checkbox"] {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.cc-cb-box {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 2px solid var(--cc-border);
+  border-radius: 6px;
+  background: var(--cc-surface-2);
+  pointer-events: none;
+  transition: background-color .15s, border-color .15s, box-shadow .15s;
+}
+.cc-cb input[type="checkbox"]:checked + .cc-cb-box {
+  background: var(--cc-accent);
+  border-color: var(--cc-accent);
+}
+.cc-cb input[type="checkbox"]:checked + .cc-cb-box::after {
+  content: "";
+  position: absolute;
+  left: 6px;
+  top: 2px;
+  width: 6px;
+  height: 11px;
+  border: solid #0a1a1f;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+.cc-toggle-row { flex-wrap: nowrap; }
+
+/* ============================================================
+   Char Companion — 主题: 粘土拟态 (Claymorphism)
+   通过在 #cc-dialog 上加 .cc-theme-clay 类切换,不影响默认深色主题
+   配色比例: 紫(主) > 粉 > 黄 ≈ 绿 > 蓝
+   ============================================================ */
+
+.cc-dialog.cc-theme-clay {
+  --cc-bg: #eef0fb;
+  --cc-surface: #ffffff;
+  --cc-surface-2: #eef0fb;
+  --cc-surface-3: #e2e4f5;
+  --cc-border: #e6e8f7;
+  --cc-text: #2e2a4d;
+  --cc-text-dim: #726c98;
+  --cc-text-faint: #a29cc4;
+  --cc-accent: #8b7ff0;
+  --cc-accent-dim: #d9d4fb;
+  --cc-accent-glow: rgba(139,127,240,0.25);
+  --cc-danger: #d9695f;
+  --cc-success: #4cbf7a;
+
+  --cc-pink: #e0609e;
+  --cc-pink-soft: #ffe1ea;
+  --cc-yellow: #f5b942;
+  --cc-yellow-soft: #fdf0d0;
+  --cc-green: #4cbf7a;
+  --cc-green-soft: #e3f6ea;
+  --cc-blue: #4d9be0;
+  --cc-blue-soft: #dbe8ff;
+
+  --cc-clay-shadow: 4px 4px 0px rgba(46,42,77,0.10);
+  --cc-clay-shadow-sm: 2px 2px 0px rgba(46,42,77,0.14);
+
+  font-family: -apple-system, 'PingFang SC', 'Inter', sans-serif;
+}
+
+.cc-theme-clay .cc-panel {
+  border: none;
+  border-radius: 22px;
+  box-shadow: 6px 6px 0px rgba(46,42,77,0.12);
+}
+
+.cc-theme-clay .cc-close-btn {
+  border: none;
+  box-shadow: var(--cc-clay-shadow-sm);
+}
+
+.cc-theme-clay .cc-tabs { border-bottom: none; gap: 5px; }
+.cc-theme-clay .cc-tab {
+  background: var(--cc-surface-3);
+  border-radius: 10px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+.cc-theme-clay .cc-tab-active {
+  background: var(--cc-accent);
+  color: #fff;
+  border-bottom-color: transparent;
+  box-shadow: var(--cc-clay-shadow-sm);
+}
+.cc-theme-clay .cc-tab:not(.cc-tab-active):hover { color: var(--cc-text-dim); }
+
+.cc-theme-clay .cc-section,
+.cc-theme-clay .cc-feature-card {
+  border: none;
+  border-radius: 16px;
+  box-shadow: var(--cc-clay-shadow);
+}
+
+.cc-theme-clay .cc-input,
+.cc-theme-clay .cc-select,
+.cc-theme-clay .cc-panel input[type="text"],
+.cc-theme-clay .cc-panel input[type="password"],
+.cc-theme-clay .cc-panel input[type="number"],
+.cc-theme-clay .cc-panel input[type="search"],
+.cc-theme-clay .cc-panel input[type="time"],
+.cc-theme-clay .cc-panel input[type="datetime-local"],
+.cc-theme-clay .cc-panel textarea,
+.cc-theme-clay .cc-panel select {
+  border: none !important;
+  border-radius: 12px !important;
+  background: var(--cc-surface-2) !important;
+}
+
+.cc-theme-clay .cc-time-row,
+.cc-theme-clay .cc-wi-list {
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--cc-clay-shadow-sm);
+}
+.cc-theme-clay .cc-time-row input[type="time"],
+.cc-theme-clay .cc-time-row input[type="text"] {
+  border: none;
+  background: var(--cc-surface-3);
+}
+
+.cc-theme-clay .cc-btn {
+  border: none;
+  border-radius: 12px;
+  box-shadow: var(--cc-clay-shadow-sm);
+  font-weight: 700;
+}
+.cc-theme-clay .cc-btn:hover { background: var(--cc-surface-3); }
+.cc-theme-clay .cc-btn-primary {
+  background: var(--cc-accent);
+  color: #fff;
+  box-shadow: 3px 3px 0px rgba(46,42,77,0.18);
+}
+.cc-theme-clay .cc-btn-primary:hover { background: #7a6ef0; }
+.cc-theme-clay .cc-save-btn { box-shadow: 3px 3px 0px rgba(46,42,77,0.16); }
+.cc-theme-clay .cc-footer { padding-top: 16px; background: var(--cc-bg); }
+
+.cc-theme-clay #cc-cancel-focus,
+.cc-theme-clay .cc-reminder-cancel {
+  color: var(--cc-danger);
+  background: rgba(217,105,95,0.12);
+  border: none;
+}
+
+/* ---------- 开关: 完全隐藏原生 checkbox(避免各浏览器自带的对勾/阴影露出来),
+   真正看到的胶囊滑块画在父容器(label 或 .cc-feature-head)上,用 :has() 感知选中状态 ---------- */
+
+/* 总开关 / 间隔模式 / 定时模式 / 勿扰时段 / 手动输入模型名 —— 这些都是 <label class="cc-toggle-row"> 包着一个 checkbox */
+.cc-theme-clay .cc-toggle-row {
+  position: relative;
+  padding-right: 44px;
+}
+.cc-theme-clay .cc-toggle-row input[type="checkbox"] {
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 20px;
+  margin: 0;
+  opacity: 0; /* 隐藏原生外观,只保留可点击范围 */
+  cursor: pointer;
+  z-index: 2;
+}
+.cc-theme-clay .cc-toggle-row::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 20px;
+  border-radius: 10px;
+  background: var(--cc-surface-3);
+  pointer-events: none;
+  transition: background-color .15s;
+}
+.cc-theme-clay .cc-toggle-row::before {
+  content: "";
+  position: absolute;
+  right: 18px; top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.15);
+  transition: right .15s;
+  z-index: 1;
+  pointer-events: none;
+}
+.cc-theme-clay .cc-toggle-row:has(input[type="checkbox"]:checked)::after {
+  background: var(--cc-accent);
+}
+.cc-theme-clay .cc-toggle-row:has(input[type="checkbox"]:checked)::before {
+  right: 2px;
+}
+.cc-theme-clay .cc-toggle-row:has(#cc-dnd-enabled:checked)::after { background: var(--cc-pink); }
+.cc-theme-clay .cc-toggle-row:has(#cc-model-manual-toggle:checked)::after { background: var(--cc-yellow); }
+.cc-theme-clay .cc-toggle-row:has(#cc-interval-enabled:checked)::after { background: var(--cc-blue); }
+.cc-theme-clay .cc-toggle-row:has(#cc-schedule-enabled:checked)::after { background: var(--cc-yellow); }
+
+/* 定时提醒时间点列表: 每一条用左侧色条区分颜色, 五色循环, 不管加多少条都能一直循环下去 */
+.cc-theme-clay .cc-time-row {
+  border-left: 4px solid var(--cc-accent);
+  padding-left: 10px;
+}
+.cc-theme-clay .cc-time-row:nth-child(5n+1) { border-left-color: var(--cc-accent); }
+.cc-theme-clay .cc-time-row:nth-child(5n+2) { border-left-color: var(--cc-pink); }
+.cc-theme-clay .cc-time-row:nth-child(5n+3) { border-left-color: var(--cc-yellow); }
+.cc-theme-clay .cc-time-row:nth-child(5n+4) { border-left-color: var(--cc-green); }
+.cc-theme-clay .cc-time-row:nth-child(5n) { border-left-color: var(--cc-blue); }
+
+/* 推送内容三张功能卡片里的开关 —— checkbox 直接放在 .cc-feature-head 里,不在 label 内 */
+.cc-theme-clay .cc-feature-head {
+  position: relative;
+  padding-right: 44px;
+}
+.cc-theme-clay .cc-feature-switch {
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.cc-theme-clay .cc-feature-head::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 36px; height: 20px;
+  border-radius: 10px;
+  background: var(--cc-surface-3);
+  pointer-events: none;
+  transition: background-color .15s;
+}
+.cc-theme-clay .cc-feature-head::before {
+  content: "";
+  position: absolute;
+  right: 18px; top: 50%;
+  transform: translateY(-50%);
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 1px 1px 0px rgba(0,0,0,0.15);
+  transition: right .15s;
+  z-index: 1;
+  pointer-events: none;
+}
+.cc-theme-clay .cc-feature-head:has(.cc-feature-switch:checked)::after {
+  background: var(--cc-accent);
+}
+.cc-theme-clay .cc-feature-head:has(.cc-feature-switch:checked)::before {
+  right: 2px;
+}
+
+/* ---------- 推送渠道 radio chip: 三种颜色区分 ---------- */
+.cc-theme-clay .cc-radio-chip label {
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+}
+.cc-theme-clay #cc-ch-bark + label { background: var(--cc-pink-soft); color: #d1548b; }
+.cc-theme-clay #cc-ch-ntfy + label { background: var(--cc-yellow-soft); color: #c9891c; }
+.cc-theme-clay #cc-ch-webhook + label { background: var(--cc-blue-soft); color: #3b7bd9; }
+.cc-theme-clay #cc-ch-bark:checked + label { background: var(--cc-pink); color: #fff; box-shadow: var(--cc-clay-shadow-sm); }
+.cc-theme-clay #cc-ch-ntfy:checked + label { background: var(--cc-yellow); color: #5c4200; box-shadow: var(--cc-clay-shadow-sm); }
+.cc-theme-clay #cc-ch-webhook:checked + label { background: var(--cc-blue); color: #fff; box-shadow: var(--cc-clay-shadow-sm); }
+
+/* ---------- 滑块 ---------- */
+.cc-theme-clay .cc-panel input[type="range"].cc-slider,
+.cc-theme-clay .cc-slider {
+  background: var(--cc-surface-3) !important;
+  height: 8px !important;
+  border-radius: 5px !important;
+}
+.cc-theme-clay .cc-panel input[type="range"].cc-slider::-webkit-slider-runnable-track,
+.cc-theme-clay .cc-slider::-webkit-slider-runnable-track {
+  background: var(--cc-surface-3) !important;
+  height: 8px !important;
+  border-radius: 5px !important;
+}
+.cc-theme-clay .cc-panel input[type="range"].cc-slider::-webkit-slider-thumb,
+.cc-theme-clay .cc-slider::-webkit-slider-thumb {
+  background: var(--cc-accent) !important;
+  box-shadow: var(--cc-clay-shadow-sm) !important;
+  width: 18px !important; height: 18px !important;
+  margin-top: -5px !important;
+}
+.cc-theme-clay .cc-panel input[type="range"].cc-slider::-moz-range-thumb,
+.cc-theme-clay .cc-slider::-moz-range-thumb {
+  background: var(--cc-accent) !important;
+  box-shadow: var(--cc-clay-shadow-sm) !important;
+  width: 18px !important; height: 18px !important;
+}
+.cc-theme-clay #cc-push-history-days::-webkit-slider-thumb,
+.cc-theme-clay #cc-slider-other::-webkit-slider-thumb { background: var(--cc-pink) !important; }
+.cc-theme-clay #cc-push-history-days::-moz-range-thumb,
+.cc-theme-clay #cc-slider-other::-moz-range-thumb { background: var(--cc-pink) !important; }
+.cc-theme-clay #cc-push-history-days-val,
+.cc-theme-clay #cc-rv-other { color: var(--cc-pink) !important; }
+.cc-theme-clay #cc-slider-weather::-webkit-slider-thumb { background: var(--cc-yellow) !important; }
+.cc-theme-clay #cc-slider-weather::-moz-range-thumb { background: var(--cc-yellow) !important; }
+.cc-theme-clay #cc-rv-weather { color: #c9891c !important; }
+.cc-theme-clay #cc-slider-health::-webkit-slider-thumb { background: var(--cc-green) !important; }
+.cc-theme-clay #cc-slider-health::-moz-range-thumb { background: var(--cc-green) !important; }
+.cc-theme-clay #cc-rv-health { color: var(--cc-green) !important; }
+
+.cc-theme-clay .cc-ratio-sum { border-top: 1px dashed var(--cc-border); }
+.cc-theme-clay .cc-ratio-sum-ok { color: var(--cc-success); }
+.cc-theme-clay .cc-ratio-sum-bad { color: var(--cc-danger); }
+
+/* ---------- 进阶推送: 三张功能卡片, 图标底色三色区分 ---------- */
+.cc-theme-clay .cc-feature-icon { border-radius: 10px; }
+.cc-theme-clay .cc-feature-card[data-feature="weather"] .cc-feature-icon { background: var(--cc-yellow-soft); }
+.cc-theme-clay .cc-feature-card[data-feature="weather"] .cc-feature-head:has(#cc-weather-switch:checked)::after { background: var(--cc-yellow); }
+.cc-theme-clay .cc-feature-card[data-feature="health"] .cc-feature-icon { background: var(--cc-pink-soft); }
+.cc-theme-clay .cc-feature-card[data-feature="health"] .cc-feature-head:has(#cc-use-health:checked)::after { background: var(--cc-pink); }
+.cc-theme-clay .cc-feature-card[data-feature="recent-chat"] .cc-feature-icon { background: var(--cc-blue-soft); }
+.cc-theme-clay .cc-feature-card[data-feature="recent-chat"] .cc-feature-head:has(#cc-use-recent-chat:checked)::after { background: var(--cc-blue); }
+
+/* ---------- 世界书勾选项: 绿/粉交替 ---------- */
+.cc-theme-clay .cc-wi-item input[type="checkbox"] { accent-color: var(--cc-green); }
+.cc-theme-clay .cc-wi-item:nth-child(odd) input[type="checkbox"] { accent-color: var(--cc-pink); }
+
+/* ---------- 功能按钮点缀 ---------- */
+.cc-theme-clay #cc-start-focus { background: var(--cc-green); box-shadow: 3px 3px 0px rgba(46,42,77,0.18); }
+.cc-theme-clay #cc-add-time,
+.cc-theme-clay #cc-reminder-add { background: var(--cc-yellow-soft); color: #c9891c; box-shadow: none; }
+.cc-theme-clay #cc-add-time:hover,
+.cc-theme-clay #cc-reminder-add:hover { background: var(--cc-yellow); color: #5c4200; }
+.cc-theme-clay #cc-fetch-models,
+.cc-theme-clay #cc-copy-focus-url,
+.cc-theme-clay #cc-copy-health-url { background: var(--cc-blue-soft); color: #3b7bd9; box-shadow: none; }
+.cc-theme-clay #cc-preset-save { background: var(--cc-green-soft); color: #2f8a56; box-shadow: none; }
+
+/* ---------- 呼吸灯保持语义色, 不参与装饰配色 ---------- */
+.cc-theme-clay .cc-pulse-dot.cc-pulse-on { background: var(--cc-accent); }
+.cc-theme-clay .cc-pulse-dot.cc-pulse-off { background: var(--cc-danger); }
+
+/* ---------- 统一复选框(.cc-cb) ---------- */
+.cc-theme-clay .cc-cb-box { border: none; background: var(--cc-surface-3); border-radius: 6px; }
+.cc-theme-clay .cc-cb input[type="checkbox"]:checked + .cc-cb-box { background: var(--cc-accent); }
+
+/* ============================================================
+   Char Companion — 主题: 极简主义 Minimalism (日间 / 夜间两套配色, 共用同一套扁平结构)
+   风格核心: 去掉卡片背景/圆角/阴影, 用细线分割, 配色收窄到黑白灰 + 强调色本身也是主文字色,
+   不做进阶推送那种多彩装饰(那是粘土拟态的思路, 这里刻意保持"有限的配色")
+   ============================================================ */
+
+.cc-dialog.cc-theme-minimal-day {
+  --cc-bg: #f7f3ea;
+  --cc-surface: #f7f3ea;
+  --cc-surface-2: #f7f3ea;
+  --cc-surface-3: #e6ded0;
+  --cc-border: #e6ded0;
+  --cc-text: #2b2620;
+  --cc-text-dim: #a39c8c;
+  --cc-text-faint: #c2b9a5;
+  --cc-accent: #2b2620;
+  --cc-accent-dim: #e6ded0;
+  --cc-accent-glow: rgba(43,38,32,0.15);
+  --cc-danger: #b3453a;
+  --cc-success: #4c7a5c;
+  font-family: -apple-system, 'PingFang SC', 'Inter', sans-serif;
+}
+
+.cc-dialog.cc-theme-minimal-night {
+  --cc-bg: #141210;
+  --cc-surface: #141210;
+  --cc-surface-2: #141210;
+  --cc-surface-3: #2b2822;
+  --cc-border: #2b2822;
+  --cc-text: #f0ece3;
+  --cc-text-dim: #8a8477;
+  --cc-text-faint: #4a463d;
+  --cc-accent: #f0ece3;
+  --cc-accent-dim: #2b2822;
+  --cc-accent-glow: rgba(240,236,227,0.15);
+  --cc-danger: #d9695f;
+  --cc-success: #7fae8f;
+  font-family: -apple-system, 'PingFang SC', 'Inter', sans-serif;
+}
+
+/* ---------- 共用扁平结构(日夜通用, 只是颜色变量不同) ---------- */
+.cc-theme-minimal-day .cc-panel,
+.cc-theme-minimal-night .cc-panel {
+  border: none;
+  border-radius: 6px;
+  box-shadow: none;
+}
+
+.cc-theme-minimal-day .cc-close-btn,
+.cc-theme-minimal-night .cc-close-btn {
+  background: transparent;
+  border: none;
+}
+
+.cc-theme-minimal-day .cc-tabs,
+.cc-theme-minimal-night .cc-tabs {
+  gap: 4px;
+  border-bottom: 1px solid var(--cc-border);
+  overflow-x: visible;
+}
+.cc-theme-minimal-day .cc-tab,
+.cc-theme-minimal-night .cc-tab {
+  flex: 1;
+  min-width: 0;
+  text-align: center;
+  padding: 0 2px 10px 2px;
+  color: var(--cc-text-dim);
+}
+.cc-theme-minimal-day .cc-tab-active,
+.cc-theme-minimal-night .cc-tab-active {
+  color: var(--cc-text);
+  border-bottom-color: var(--cc-text);
+}
+
+.cc-theme-minimal-day .cc-section,
+.cc-theme-minimal-night .cc-section,
+.cc-theme-minimal-day .cc-feature-card,
+.cc-theme-minimal-night .cc-feature-card {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid var(--cc-border);
+  padding: 18px 0;
+}
+.cc-theme-minimal-day .cc-section:first-child,
+.cc-theme-minimal-night .cc-section:first-child,
+.cc-theme-minimal-day .cc-feature-card:first-child,
+.cc-theme-minimal-night .cc-feature-card:first-child {
+  padding-top: 0;
+}
+.cc-theme-minimal-day .cc-section h3,
+.cc-theme-minimal-night .cc-section h3 {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cc-text-dim);
+}
+
+.cc-theme-minimal-day .cc-input,
+.cc-theme-minimal-night .cc-input,
+.cc-theme-minimal-day .cc-select,
+.cc-theme-minimal-night .cc-select,
+.cc-theme-minimal-day .cc-panel input[type="text"],
+.cc-theme-minimal-night .cc-panel input[type="text"],
+.cc-theme-minimal-day .cc-panel input[type="password"],
+.cc-theme-minimal-night .cc-panel input[type="password"],
+.cc-theme-minimal-day .cc-panel input[type="number"],
+.cc-theme-minimal-night .cc-panel input[type="number"],
+.cc-theme-minimal-day .cc-panel input[type="search"],
+.cc-theme-minimal-night .cc-panel input[type="search"],
+.cc-theme-minimal-day .cc-panel input[type="time"],
+.cc-theme-minimal-night .cc-panel input[type="time"],
+.cc-theme-minimal-day .cc-panel input[type="datetime-local"],
+.cc-theme-minimal-night .cc-panel input[type="datetime-local"],
+.cc-theme-minimal-day .cc-panel textarea,
+.cc-theme-minimal-night .cc-panel textarea,
+.cc-theme-minimal-day .cc-panel select,
+.cc-theme-minimal-night .cc-panel select {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--cc-border) !important;
+  border-radius: 0 !important;
+  padding-left: 0 !important;
+}
+
+.cc-theme-minimal-day .cc-label,
+.cc-theme-minimal-night .cc-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cc-theme-minimal-day .cc-btn,
+.cc-theme-minimal-night .cc-btn {
+  background: transparent;
+  border: 1px solid var(--cc-border);
+  border-radius: 0;
+  color: var(--cc-text-dim);
+}
+.cc-theme-minimal-day .cc-btn-primary,
+.cc-theme-minimal-night .cc-btn-primary {
+  background: var(--cc-text);
+  border-color: var(--cc-text);
+  color: var(--cc-bg);
+}
+.cc-theme-minimal-day .cc-btn-primary:hover,
+.cc-theme-minimal-night .cc-btn-primary:hover { opacity: 0.85; }
+.cc-theme-minimal-day .cc-save-btn,
+.cc-theme-minimal-night .cc-save-btn { box-shadow: none; }
+.cc-theme-minimal-day .cc-footer,
+.cc-theme-minimal-night .cc-footer { border-top: 1px solid var(--cc-border); background: var(--cc-bg); }
+
+.cc-theme-minimal-day #cc-cancel-focus,
+.cc-theme-minimal-night #cc-cancel-focus,
+.cc-theme-minimal-day .cc-reminder-cancel,
+.cc-theme-minimal-night .cc-reminder-cancel {
+  color: var(--cc-danger);
+  border-color: var(--cc-danger);
+  background: transparent;
+}
+
+/* ---------- 开关: 细线 + 圆点, 不做胶囊 ---------- */
+.cc-theme-minimal-day .cc-toggle-row,
+.cc-theme-minimal-night .cc-toggle-row,
+.cc-theme-minimal-day .cc-feature-head,
+.cc-theme-minimal-night .cc-feature-head {
+  position: relative;
+  padding-right: 40px;
+}
+.cc-theme-minimal-day .cc-toggle-row input[type="checkbox"],
+.cc-theme-minimal-night .cc-toggle-row input[type="checkbox"],
+.cc-theme-minimal-day .cc-feature-switch,
+.cc-theme-minimal-night .cc-feature-switch {
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 14px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.cc-theme-minimal-day .cc-toggle-row::after,
+.cc-theme-minimal-night .cc-toggle-row::after,
+.cc-theme-minimal-day .cc-feature-head::after,
+.cc-theme-minimal-night .cc-feature-head::after {
+  content: "";
+  position: absolute;
+  right: 0; top: 50%;
+  transform: translateY(-50%);
+  width: 30px; height: 1px;
+  background: var(--cc-border);
+  pointer-events: none;
+}
+.cc-theme-minimal-day .cc-toggle-row::before,
+.cc-theme-minimal-night .cc-toggle-row::before,
+.cc-theme-minimal-day .cc-feature-head::before,
+.cc-theme-minimal-night .cc-feature-head::before {
+  content: "";
+  position: absolute;
+  right: 20px; top: 50%;
+  transform: translateY(-50%);
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cc-text-faint);
+  transition: right .15s, background-color .15s;
+  z-index: 1;
+  pointer-events: none;
+}
+.cc-theme-minimal-day .cc-toggle-row:has(input[type="checkbox"]:checked)::before,
+.cc-theme-minimal-night .cc-toggle-row:has(input[type="checkbox"]:checked)::before,
+.cc-theme-minimal-day .cc-feature-head:has(.cc-feature-switch:checked)::before,
+.cc-theme-minimal-night .cc-feature-head:has(.cc-feature-switch:checked)::before {
+  right: 0;
+  background: var(--cc-text);
+}
+
+/* ---------- 推送渠道: 下划线式而不是胶囊 chip ---------- */
+.cc-theme-minimal-day .cc-radio-chip label,
+.cc-theme-minimal-night .cc-radio-chip label {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0 0 6px 0;
+  color: var(--cc-text-dim);
+  border-bottom: 1px solid transparent;
+}
+.cc-theme-minimal-day .cc-radio-chip input:checked + label,
+.cc-theme-minimal-night .cc-radio-chip input:checked + label {
+  background: transparent;
+  color: var(--cc-text);
+  border-bottom-color: var(--cc-text);
+}
+
+/* ---------- 滑块: 细线 ---------- */
+.cc-theme-minimal-day .cc-panel input[type="range"].cc-slider,
+.cc-theme-minimal-night .cc-panel input[type="range"].cc-slider,
+.cc-theme-minimal-day .cc-slider,
+.cc-theme-minimal-night .cc-slider {
+  background: var(--cc-border) !important;
+  height: 1px !important;
+  border-radius: 0 !important;
+}
+.cc-theme-minimal-day .cc-panel input[type="range"].cc-slider::-webkit-slider-runnable-track,
+.cc-theme-minimal-night .cc-panel input[type="range"].cc-slider::-webkit-slider-runnable-track,
+.cc-theme-minimal-day .cc-slider::-webkit-slider-runnable-track,
+.cc-theme-minimal-night .cc-slider::-webkit-slider-runnable-track {
+  background: var(--cc-border) !important;
+  height: 1px !important;
+}
+.cc-theme-minimal-day .cc-panel input[type="range"].cc-slider::-webkit-slider-thumb,
+.cc-theme-minimal-night .cc-panel input[type="range"].cc-slider::-webkit-slider-thumb,
+.cc-theme-minimal-day .cc-slider::-webkit-slider-thumb,
+.cc-theme-minimal-night .cc-slider::-webkit-slider-thumb {
+  background: var(--cc-text) !important;
+  box-shadow: none !important;
+  width: 10px !important; height: 10px !important;
+  margin-top: -4.5px !important;
+}
+.cc-theme-minimal-day .cc-panel input[type="range"].cc-slider::-moz-range-thumb,
+.cc-theme-minimal-night .cc-panel input[type="range"].cc-slider::-moz-range-thumb,
+.cc-theme-minimal-day .cc-slider::-moz-range-thumb,
+.cc-theme-minimal-night .cc-slider::-moz-range-thumb {
+  background: var(--cc-text) !important;
+  box-shadow: none !important;
+  width: 10px !important; height: 10px !important;
+}
+.cc-theme-minimal-day .cc-ratio-val,
+.cc-theme-minimal-night .cc-ratio-val { color: var(--cc-text) !important; }
+.cc-theme-minimal-day .cc-ratio-sum,
+.cc-theme-minimal-night .cc-ratio-sum { border-top: 1px solid var(--cc-border); }
+.cc-theme-minimal-day .cc-ratio-sum-ok,
+.cc-theme-minimal-night .cc-ratio-sum-ok { color: var(--cc-success); }
+.cc-theme-minimal-day .cc-ratio-sum-bad,
+.cc-theme-minimal-night .cc-ratio-sum-bad { color: var(--cc-danger); }
+
+/* ---------- 功能卡片图标: 去掉彩色底色, 保持单色 ---------- */
+.cc-theme-minimal-day .cc-feature-icon,
+.cc-theme-minimal-night .cc-feature-icon {
+  background: transparent;
+  border-radius: 0;
+  filter: grayscale(100%);
+  opacity: 0.7;
+}
+
+/* ---------- 定时提醒时间点: 去掉卡片, 细线分隔, 不做彩色区分(保持极简的"有限配色") ---------- */
+.cc-theme-minimal-day .cc-time-row,
+.cc-theme-minimal-night .cc-time-row {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--cc-border);
+  border-radius: 0;
+  padding: 10px 0;
+}
+.cc-theme-minimal-day .cc-time-row input[type="time"],
+.cc-theme-minimal-night .cc-time-row input[type="time"],
+.cc-theme-minimal-day .cc-time-row input[type="text"],
+.cc-theme-minimal-night .cc-time-row input[type="text"] {
+  background: transparent;
+  border: none;
+}
+
+/* ---------- 世界书勾选项: 单色 accent ---------- */
+.cc-theme-minimal-day .cc-wi-item input[type="checkbox"],
+.cc-theme-minimal-night .cc-wi-item input[type="checkbox"] {
+  accent-color: var(--cc-text);
+}
+.cc-theme-minimal-day .cc-wi-list,
+.cc-theme-minimal-night .cc-wi-list {
+  background: transparent;
+  border: 1px solid var(--cc-border);
+  border-radius: 0;
+}
+
+/* ---------- 统一复选框(.cc-cb) ---------- */
+.cc-theme-minimal-day .cc-cb-box,
+.cc-theme-minimal-night .cc-cb-box {
+  border: 1px solid var(--cc-border);
+  background: transparent;
+  border-radius: 0;
+}
+.cc-theme-minimal-day .cc-cb input[type="checkbox"]:checked + .cc-cb-box,
+.cc-theme-minimal-night .cc-cb input[type="checkbox"]:checked + .cc-cb-box {
+  background: var(--cc-text);
+  border-color: var(--cc-text);
+}
